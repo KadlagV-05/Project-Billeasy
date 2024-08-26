@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bumblebee-app-ingress  # Updated to match the naming convention
+  namespace: bumblebee-test-ns  # Matching the namespace from the deployment
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: bumblebee-ingress-class  # Specify the ingress class name
+  rules:
+  - host: bumblebee-app.local  # Updated to reflect the app's domain
+    http:
+      paths: 
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: bumblebee-svc  # Match this to the service name
+            port:
+              number: 80  # Port should match the container port from the deployment

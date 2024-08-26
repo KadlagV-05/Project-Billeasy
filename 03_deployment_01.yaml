@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bumblebee-nginx
+  namespace: bumblebee-test-ns
+  labels:
+    app: bumblebee
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bumblebee
+  template:
+    metadata:
+      labels:
+        app: bumblebee
+    spec:
+      containers:
+      - name: bumblebee-go
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: mydockerhubsecret

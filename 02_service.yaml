@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bumblebee-svc # Name for SVC visible on terminal/console
+  namespace: bumblebee-test-ns  # New namespace for new project 
+  labels:
+    app: bumblebee  # by what name svc will be known in cluster so that resources can be mapped in it 
+spec:
+  ports:
+  - port: 80
+    targetPort: 80     # Port connections
+    protocol: TCP
+  selector:
+    app: bumblebee
+  type: LoadBalancer
